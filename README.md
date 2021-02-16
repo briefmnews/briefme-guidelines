@@ -36,3 +36,17 @@ for the same functional need, we should use the decorator
 (e.g.: `LoginRequiredMixin` mixin and `login_required` decorator)
 
 ## Commit formatting
+The philosophy of this specification is based on [conventional commits](https://www.conventionalcommits.org/en/).
+We adapted it to fit our business needs and habits.
+
+Here is the list of verbs with their usage that must be used in our projects:
+
+| Verbs         | Usage                                                                             |
+| ------------- |:---------------------------------------------------------------------------------:|
+| fix           | Patch a bug                                                                       |
+| feat          | Add new feature                                                                   |
+| refactor      | A code change that neither fixes a bug nor adds a feature                         |
+| style         | Changes that do not affect the meaning of the code (white-space, formatting, ...) |
+| docs          | Documentation only changes                                                        |
+| chore         | Changes to configuration files (CI, Makefile, pytest.ini, black.toml, ...)        |
+| test          | Adding missing tests or correcting existing tests                                 |
