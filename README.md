@@ -35,6 +35,11 @@ When having the choice between a mixin and a decorator
 for the same functional need, we should use the decorator
 (e.g.: `LoginRequiredMixin` mixin and `login_required` decorator)
 
+### Chargify calls
+When calling an endpoint to the Chargify's API, we should always use the methods within the `ChargifyHelper` class.
+`chargify_python` should only be used within `ChargifyHelper` methods.
+
+
 ## Commit formatting
 The philosophy of this specification is based on [conventional commits](https://www.conventionalcommits.org/en/).
 We adapted it to fit our business needs and habits.
