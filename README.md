@@ -35,6 +35,59 @@ When having the choice between a mixin and a decorator
 for the same functional need, we should use the decorator
 (e.g.: `LoginRequiredMixin` mixin and `login_required` decorator)
 
+### Signals / Handlers
+#### Architecture
+When it comes to signals and handlers, we should adopt the following architecture:
+```
+app_name    
+│
+└───signals
+│   │   __init__.py
+│   │   handlers.py
+│     
+│    __init__.py
+│    ... 
+│    apps.py 
+│    ... 
+```
+
+Signal handlers should live in `app_name/siganls/handlers.py`:
+```python
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from myapp.models import MyModel
+
+@receiver(pre_save, sender=MyModel)
+def my_handler(sender, **kwargs):
+    pass
+```
+
+Handlers should be registered in `app_name/apps.py`:
+```python
+from django.apps import AppConfig
+
+class AppNameConfig(AppConfig):
+    name = 'app_name'
+    verbose_name = "App names"
+
+    def ready(self):
+        import app_name.signals.handlers #noqa
+```
+
+Make sure that `AppNameConfig` is loaded in `app_name/__init__.py`:
+```python
+default_app_config = "app_name.apps.AppNameConfig"
+```
+
+If you need to provide signals for other apps to listen to, you must do it in `app_name/signals/__init__.py`:
+```python
+import django.dispatch
+
+my_signal = django.dispatch.Signal(providing_args=["dummy_arg"])
+```
+
+Another app can listen to the signal by using `from app_name.signals import my_signal`
+
 ### Chargify calls
 When calling an endpoint to the Chargify's API, we should always use the methods within the `ChargifyHelper` class.
 `chargify_python` should only be used within `ChargifyHelper` methods.
