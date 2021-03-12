@@ -92,6 +92,15 @@ Another app can listen to the signal by using `from app_name.signals import my_s
 When calling an endpoint to the Chargify's API, we should always use the methods within the `ChargifyHelper` class.
 `chargify_python` should only be used within `ChargifyHelper` methods.
 
+### Code formatting
+Code formatting is handled by [black](https://github.com/psf/black). We use the default configuration of 88 characters per line
+for open source and shared apps and a value of 99 characters for `briefme_cms` and `brief.eco`.
+
+#### Optional: PyCharm users
+You can create a file watcher by going into `File->Settings...->Tools->File Watchers` and create a new entry with the following config:
+![File Watcher](img/file_watcher.png)
+This will trigger black without you noticing it.
+
 
 ## Commit formatting
 The philosophy of this specification is based on [conventional commits](https://www.conventionalcommits.org/en/).
