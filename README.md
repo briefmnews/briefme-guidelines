@@ -117,3 +117,16 @@ Here is the list of verbs with their usage that must be used in our projects:
 | docs          | Documentation only changes                                                        |
 | chore         | Changes to configuration files (CI, Makefile, pytest.ini, black.toml, ...)        |
 | test          | Adding missing tests or correcting existing tests                                 |
+
+
+## Deployment process
+Here are the steps to follow when we want to deploy to `master`. We should follow this process even for small changes to avoid taking down the production site. 
+1. Push the code to `staging`.
+0. Check that the build and deploy steps completed successfully on the [Platform.sh UI](https://console.platform.sh/briefme/7pgnum36iuhjy/staging).
+   You should see a green check if everything is fine, or an orange warning sign is something unexpected happened.
+0. Open a private session on the browser of the [marketing site](https://www.staging-5em2ouy-7pgnum36iuhjy.eu.platform.sh/).
+0. Open a logged-in session of the [editorial site](https://app.staging-5em2ouy-7pgnum36iuhjy.eu.platform.sh/).
+0. (If there is at least one new migration) Make a backup of the production database with the command `platform backup`.
+0. Push the code to `master`.
+0. Open a private session on the browser of the [marketing site](https://www.brief.me/).
+0. Open a logged-in session of the [editorial site](https://app.brief.me/).
