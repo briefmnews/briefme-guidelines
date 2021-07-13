@@ -51,7 +51,7 @@ app_name
 │    ... 
 ```
 
-Signal handlers should live in `app_name/siganls/handlers.py`:
+Signal handlers should live in `app_name/signals/handlers.py`:
 ```python
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
