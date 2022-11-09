@@ -94,7 +94,7 @@ When calling an endpoint to the Chargify's API, we should always use the methods
 
 ### Code formatting
 Code formatting is handled by [black](https://github.com/psf/black). We use the default configuration of 88 characters per line
-for open source and shared apps and a value of 99 characters for `briefme_cms` and `brief.eco`.
+for open source and shared apps and a value of 99 characters for `briefme_cms` `brief.eco`, `brief.science` and `briefme-core`.
 
 #### Optional: PyCharm users
 You can create a file watcher by going into `File->Settings...->Tools->File Watchers` and create a new entry with the following config:
