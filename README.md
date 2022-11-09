@@ -118,6 +118,13 @@ Here is the list of verbs with their usage that must be used in our projects:
 | chore         | Changes to configuration files (CI, Makefile, pytest.ini, black.toml, ...)        |
 | test          | Adding missing tests or correcting existing tests                                 |
 
+Examples of usage:
+```
+git commit -m "feat(editorial): allow admin user to see draft and pending news #1034"
+git commit -m "test(menu): fix test name TestGetStatus::test_with_restricted_access_user #34"
+git commit -m "chore: release version 2.63.0"
+git commit -m "refactor(api_setup): log an error if a menu is not found" -m "Otherwise, end user might be in a poor state without staff knowing it"
+```
 
 ## Deployment process
 Here are the steps to follow when we want to deploy to `master`. We should follow this process even for small changes to avoid taking down the production site. 
