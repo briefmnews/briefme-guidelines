@@ -35,6 +35,15 @@ When having the choice between a mixin and a decorator
 for the same functional need, we should use the decorator
 (e.g.: `LoginRequiredMixin` mixin and `login_required` decorator)
 
+### Django admin site
+#### Field description
+we use the display() decorator to customize how the field is presented:
+```python
+@admin.display(description="dernière mise à jour")
+    def last_modified(self, obj):
+        return obj.extendedflatpage.last_modified
+```
+
 ### Signals / Handlers
 #### Architecture
 When it comes to signals and handlers, we should adopt the following architecture:
