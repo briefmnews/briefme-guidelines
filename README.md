@@ -97,6 +97,31 @@ my_signal = django.dispatch.Signal(providing_args=["dummy_arg"])
 
 Another app can listen to the signal by using `from app_name.signals import my_signal`
 
+### ObjectDoesNotExist
+When handling exceptions for objects that do not exist, we should prioritize the use of `ObjectDoesNotExist` over `Model.ModelDoesNotExist`.
+
+```python
+# ✅ Good
+from django.core.exceptions import ObjectDoesNotExist
+
+try:
+    user = User.objects.get(id=user_id)
+except ObjectDoesNotExist:
+    # Handle the case where the user does not exist
+    pass
+
+# ❌ Avoid
+from myapp.models import User
+
+try:
+    user = User.objects.get(id=user_id)
+except User.DoesNotExist:
+    # Handle the case where the user does not exist
+    pass
+```
+
+This approach provides better code consistency, avoids importing each model specifically to handle its exceptions, makes the code more generic and facilitates better error handling.
+
 ### Chargify calls
 When calling an endpoint to the Chargify's API, we should always use the methods within the `ChargifyHelper` class.
 `chargify_python` should only be used within `ChargifyHelper` methods.
