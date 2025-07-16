@@ -10,6 +10,68 @@ from Brief.me's tech team and outside collaborators.
 
 ## Coding style (Django)
 ### Views
+#### Naming Convention
+View classes should be suffixed with their parent view type to clearly indicate their inheritance and purpose. 
+
+```python
+# ✅ Good examples
+class EditorialListView(ListView):
+    """Displays a list of editorial content."""
+    pass
+
+class UserDetailView(DetailView):
+    """Shows detailed information about a user."""
+    pass
+
+# ❌ Avoid
+class Editorial(ListView):  # Missing view type suffix
+    pass
+
+class PanoramaView(TemplateView):  # Generic 'View' suffix instead of specific type
+    pass
+```
+
+This helps maintain consistency and improves code readability.
+
+#### Context Data
+When adding context data to Django views, prefer adding context variables individually rather than using the context.update() method. 
+
+```python
+# ✅ Good
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["object_id"] = self.object.id
+    context["show_paywall"] = self._show_paywall()
+    return context
+
+# ❌ Avoid
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context.update({
+        "object_id": self.object.id,
+        "show_paywall": self._show_paywall()
+    })
+    return context
+```
+
+This approach improves code readability, makes debugging easier, and allows for better maintainability.
+
+#### Private methods
+Methods intended for internal use within a class should be prefixed with a single underscore (_). This convention indicates that the method is private and should not be accessed from outside the class.
+
+```python
+class ArticleView(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["related_articles"] = self._get_related_articles()
+        return context
+    
+    #🔒 private method
+    def _get_related_articles(self):
+        """Internal method to fetch related articles."""
+        return Article.objects.filter(category=self.object.category)
+```
+
 #### Decorators
 Decorators should be placed at the method level when it exists and 
 at the class level otherwise.
