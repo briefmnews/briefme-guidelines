@@ -97,6 +97,27 @@ When having the choice between a mixin and a decorator
 for the same functional need, we should use the decorator
 (e.g.: `LoginRequiredMixin` mixin and `login_required` decorator)
 
+### URLs
+#### Naming Convention
+All the routes specified into urls.py files needs a "/" at the end of paths
+```python
+urlpatterns = [
+    path(
+        "le-mot-en-suspens/<int:pk>/",
+        WordOfTheDayGameView.as_view(),
+        name="wordofthedaygame_detail",
+    ),
+    path(
+        "le-mot-en-suspens/archives/",
+        WordOfTheDayArchiveView.as_view(),
+        name="wordofthedaygame_archive",
+    ),
+    path("archives/", AllGamesArchiveListView.as_view(), name="games_archive"),
+    ...
+]
+```
+
+
 ### Django admin site
 #### Field description
 we use the display() decorator to customize how the field is presented:
