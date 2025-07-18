@@ -60,7 +60,7 @@ This approach improves code readability, makes debugging easier, and allows for 
 Methods intended for internal use within a class should be prefixed with a single underscore (_). This convention indicates that the method is private and should not be accessed from outside the class.
 
 ```python
-class ArticleView(DetailView):
+class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["related_articles"] = self._get_related_articles()
